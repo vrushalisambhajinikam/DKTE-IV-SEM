@@ -1,0 +1,64 @@
+Router>enable
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname DHCP-Server
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server(config)#int f0/0
+DHCP-Server(config-if)#ip add 192.168.1.1 255.255.255.0
+DHCP-Server(config-if)#no sh
+
+DHCP-Server(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+DHCP-Server(config-if)#int f0/1
+DHCP-Server(config-if)#ip add 192.168.2.1
+% Incomplete command.
+DHCP-Server(config-if)#ip add 192.168.2.1 255.255.255.0
+DHCP-Server(config-if)#no sh
+
+DHCP-Server(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+DHCP-Server(config-if)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.1.1     YES manual up                    up 
+FastEthernet0/1        192.168.2.1     YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+DHCP-Server(config-if)#
+DHCP-Server(config-if)#
+DHCP-Server(config-if)#ip dhcp excluded-address 192.168.1.1
+DHCP-Server(config)#
+DHCP-Server(config)#ip dhcp ex
+% Incomplete command.
+DHCP-Server(config)#ip dhcp excluded-address 192.168.1.1
+DHCP-Server(config)#ip dhcp excluded-address 192.168.2.1
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server(config)#ip dhcp pool 192.168.1.1
+DHCP-Server(dhcp-config)#net
+% Incomplete command.
+DHCP-Server(dhcp-config)#network 192.168.1.0 255.255.255.0
+DHCP-Server(dhcp-config)#default-router 192.168.1.1
+DHCP-Server(dhcp-config)#dns-server 8.8.8.8
+DHCP-Server(dhcp-config)#exit
+DHCP-Server(config)#ip dhcp 192.168.2.1
+                            ^
+% Invalid input detected at '^' marker.
+	
+DHCP-Server(config)#ip dhcp pool 192.168.2.1
+DHCP-Server(dhcp-config)#network 192.168.2.0 255.255.255.0
+DHCP-Server(dhcp-config)#default-router 192.168.2.1
+DHCP-Server(dhcp-config)#dns-server 8.8.8.8
+DHCP-Server(dhcp-config)#exit
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server(config)#
+DHCP-Server#
+%SYS-5-CONFIG_I: Configured from console by console
